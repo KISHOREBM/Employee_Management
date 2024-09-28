@@ -1,0 +1,11 @@
+a = 1000
+b = 1001
+print(a is b)  # Likely False as larger numbers may not be interned
+
+def check_identity():
+    a = 1000
+    b = 1001
+    print(a is b)  # Likely False in this context
+
+check_identity()
+

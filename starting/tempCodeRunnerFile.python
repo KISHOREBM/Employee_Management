@@ -1,0 +1,17 @@
+# cook your dish here
+import time
+strt=time.time()
+for _ in range(int(input())):
+    b=int(input())
+    result=0
+    for i in range(b+1):
+        k=i
+        if i>=10:
+            while k>=0:
+                res=k%10
+                result+=res
+                k/=10
+        else:
+            result+=k
+    print(result)
+print(time.time()-strt)
