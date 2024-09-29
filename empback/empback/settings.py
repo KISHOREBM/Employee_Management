@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'empback.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'employee',            # Ensure this is the correct database name
-        'USER': 'root',              # Remove leading space
-        'PASSWORD': 'kishor',        # Ensure this is the correct password
-        'HOST': 'localhost',         # Use 'localhost' if MySQL is running on the same machine
-        'PORT': '3306',              # Default MySQL port
+        'NAME': '',            # Ensure this is the correct database name
+        'USER': '',              # Give UserName
+        'PASSWORD': '',        # Ensure this is the correct password
+        'HOST': '',         # Use 'localhost' if MySQL is running on the same machine
+        'PORT': '',              # Default MySQL port
     }
 }
 
