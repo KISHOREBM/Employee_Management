@@ -33,7 +33,7 @@ const Search = () => {
         adname: localStorage.getItem('adname')
       }})
       console.log(adname)
-      if(response.data!="")
+      if(response.data.detail=="true")
       {
         setvalue(response.data);
         setsee(false);

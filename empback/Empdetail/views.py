@@ -26,7 +26,7 @@ def get_emp(request):
         # print("i am post")
         adname = request.query_params.get('adname')
         if not adname:
-            return Response({"detail": "adname parameter is required"}, status=400)
+            return Response({"detail": "false","info":"adname parameter is required"}, status=400)
         
         try:
             emp_instance = employee.objects.filter(adname__adname=adname)
@@ -39,13 +39,16 @@ def get_emp(request):
         # print("i am put")
         data=request.data
         emp_instanse=employee.objects.get(empid=data['value'])
+        print('i')
         if  emp_instanse:
             searilizer=Empdetail(emp_instanse,data=data['data'],partial=True)
             if searilizer.is_valid():
                 searilizer.save()
             print(searilizer.errors)
             return Response({"detail":"true","info":"loged in "})
+            print('a')
         else:
+            print('b')
             return Response({"detail":"false","info":"in valid user"})
             
     else:
@@ -82,6 +85,7 @@ def user_login(request):
     if user:
         return Response({"value":"true","info":"suscessful logedin"})
     else:
+        print("iamhere")
         return Response({"value":"false","info":"Invalid username or password"})
         
     

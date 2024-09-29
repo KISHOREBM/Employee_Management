@@ -15,7 +15,8 @@ const Navbar = () => {
     {
         if(localStorage.getItem("isAuth"))
         {    
-            console.log("in true");
+            console.log(localStorage.getItem("isAuth"));
+            console.log(isAuth)
             setlogedin(false);
             setIsAuth(false);
             localStorage.setItem("adname","")
