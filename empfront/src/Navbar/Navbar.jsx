@@ -9,11 +9,11 @@ import login from "../assets/login.png"
 import logout from "../assets/logout.png"
 import signupi from '../assets/signup.png';
 const Navbar = () => {
-    const {logedin,setlogedin,setIsAuth,setadname,adname}=useContext(Admininfo);
+    const {logedin,setlogedin,setIsAuth,setadname,adname,isAuth}=useContext(Admininfo);
     const navigate= useNavigate()
     const change=()=>
     {
-        if(logedin)
+        if(isAuth)
         {    
             console.log("in true");
             setlogedin(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
             {
                 navigate("/login");
                 console.log("in false");
-                console.log(logedin)
+                console.log(isAuth)
             }
     }
   return (
@@ -54,13 +54,13 @@ const Navbar = () => {
         </div>
         <div>
         <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2' onClick={()=>{change()}}>
-                {!logedin &&<img src={login} alt="" className='w-[20px] h-[20px] '/>}
-                {logedin && <img src={logout} alt="" className='w-[20px] h-[20px] '/>}
+                {!isAuth &&<img src={login} alt="" className='w-[20px] h-[20px] '/>}
+                {isAuth && <img src={logout} alt="" className='w-[20px] h-[20px] '/>}
 
-                <button onClick={()=>{change()}}>{(logedin)?"logout":"login"}</button>
+                <button onClick={()=>{change()}}>{(isAuth)?"logout":"login"}</button>
         </div>
         
-        {!logedin && <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2'>
+        {!isAuth && <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2'>
                 <img src={signupi} alt="" onClick={()=>{navigate("/signup")}} className='w-[20px] h-[20px] bg-white rounded-[23px]'/>
                 <Link to="/signup">Sign up</Link>
         </div>}
