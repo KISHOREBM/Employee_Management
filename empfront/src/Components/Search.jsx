@@ -20,7 +20,7 @@ const Search = () => {
   const [see,setsee]=useState(true)
   const [update,setupdate]=useState()
   const [valu,setvalue]=useState()
-  const {adname,isAuth,logedin,setIsAuth,setadname,setlogedin}=useContext(Admininfo)
+  const {adname}=useContext(Admininfo)
   const navigate=useNavigate()
     const getinfo=async()=>{
       console.log(localStorage.getItem('isAuth'))
@@ -30,7 +30,7 @@ const Search = () => {
         return;
       }
       const response = await axios.get("http://127.0.0.1:8000/app/getemp/",{params: {
-        adname: adname
+        adname: localStorage.getItem('adname')
       }})
       console.log(adname)
       if(response.data!="")
@@ -46,7 +46,7 @@ const Search = () => {
     const updateinfo=async(e)=>{
       // console.log("i am in")
       e.preventDefault();
-      const response = await axios.put("http://127.0.0.1:8000/app/getemp/",{"value":update,"data":{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${adname}`}})
+      const response = await axios.put("http://127.0.0.1:8000/app/getemp/",{"value":update,"data":{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${localStorage.getItem('adname')}`}})
       if(response.data['detail']==="true")
       {
         getinfo();
