@@ -13,7 +13,7 @@ const Navbar = () => {
     const navigate= useNavigate()
     const change=()=>
     {
-        if(isAuth)
+        if(localStorage.getItem("isAuth"))
         {    
             console.log("in true");
             setlogedin(false);
