@@ -23,7 +23,8 @@ const Search = () => {
   const {adname,isAuth,logedin,setIsAuth,setadname,setlogedin}=useContext(Admininfo)
   const navigate=useNavigate()
     const getinfo=async()=>{
-      if(!isAuth || !logedin){
+      console.log(localStorage.getItem('isAuth'))
+      if(!localStorage.getItem("isAuth")){
         toast.error("please login");
         navigate("/login")
         return;
