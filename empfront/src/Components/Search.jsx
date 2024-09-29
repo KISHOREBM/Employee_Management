@@ -20,22 +20,22 @@ const Search = () => {
   const [see,setsee]=useState(true)
   const [update,setupdate]=useState()
   const [valu,setvalue]=useState()
-  const {adname}=useContext(Admininfo)
+  const {adname,isAuth,setisAuth}=useContext(Admininfo)
   const navigate=useNavigate()
     const getinfo=async()=>{
-      console.log(localStorage.getItem('isAuth'))
-      if(!localStorage.getItem("isAuth")){
+      console.log(isAuth)
+      if(!isAuth){
         toast.error("please login");
         navigate("/login")
         return;
       }
       const response = await axios.get("http://127.0.0.1:8000/app/getemp/",{params: {
-        adname: localStorage.getItem('adname')
+        adname: adname
       }})
       console.log(adname)
       if(response.data.detail=="true")
       {
-        setvalue(response.data);
+        setvalue(response.data.info);
         setsee(false);
       }
       else{
@@ -46,7 +46,7 @@ const Search = () => {
     const updateinfo=async(e)=>{
       // console.log("i am in")
       e.preventDefault();
-      const response = await axios.put("http://127.0.0.1:8000/app/getemp/",{"value":update,"data":{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${localStorage.getItem('adname')}`}})
+      const response = await axios.put("http://127.0.0.1:8000/app/getemp/",{"value":update,"data":{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${adname}`}})
       if(response.data['detail']==="true")
       {
         getinfo();
@@ -87,7 +87,7 @@ const Search = () => {
           {see && (
             <div className='w-full flex justify-center items-center mt-80 flex-col'>
               <p className='text-gray-500   '>Click button for detail</p>
-              <button onClick={getinfo} className='bg-blue-400 text-white w-[70px] text-wrap border-3 rounded-[45px] transform transition delay-200 hover:scale-125'>Get Info</button>
+              <button onClick={()=>{getinfo()}} className='bg-blue-400 text-white w-[70px] text-wrap border-3 rounded-[45px] transform transition delay-200 hover:scale-125'>Get Info</button>
             </div>
           )}
 

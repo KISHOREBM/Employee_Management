@@ -8,13 +8,7 @@ import Signup from "./Components/Signup";
 import { Admininfo } from "./Context/Context";
 
 function App() {
-  const {setadname,setlogedin,adname,logedin,isAuth,setIsAuth}=useContext(Admininfo);
 
-  const setloged=()=>{
-    setIsAuth(localStorage.getItem("isAuth"));
-    setlogedin(localStorage.getItem("isAuth"));
-    setadname(localStorage.getItem("adname"));
-  }
   return (
     <div className="h-screen flex">
       <Router>

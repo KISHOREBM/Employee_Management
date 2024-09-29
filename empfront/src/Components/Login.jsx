@@ -10,7 +10,7 @@ const Login = () => {
     const [password1,setpassword1]=useState("")
     const navigate=useNavigate()
     // const [withname,setwithname]=useState(true)
-    const {setadname,setlogedin,adname,setIsAuth}=useContext(Admininfo)
+    const {setadname,adname,setIsAuth}=useContext(Admininfo)
     const seelogin=async (e)=>{
       e.preventDefault()
         const response =await axios.post("http://127.0.0.1:8000/app/login/",{"username":`${username}`,"password":`${password1}`})
@@ -18,11 +18,10 @@ const Login = () => {
         if(response.data.value==="true")
         {
           setadname(username)
-          localStorage.setItem("isAuth",true);
           setIsAuth(true);
-          setlogedin(true)
+          localStorage.setItem("isAuth",true)
+          localStorage.setItem("adname",username)
           console.log(adname)
-          localStorage.setItem("adname",username);
           navigate("/")
           toast.success("succesfully loged in")
 
@@ -35,7 +34,7 @@ const Login = () => {
   return (
     <div className='flex justify-center items-center h-screen'>
     <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center'>
-      <form onSubmit={seelogin}>
+      <form onSubmit={(e)=>(seelogin(e))}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
           <label htmlFor="">Name:</label>
           <input type="text" placeholder='Enter Name' className='outline-none w-[300px]' required value={username} onChange={(e)=>{setusername(e.target.value)}} />

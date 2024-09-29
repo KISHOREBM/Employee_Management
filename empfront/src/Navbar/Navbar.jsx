@@ -9,29 +9,21 @@ import login from "../assets/login.png"
 import logout from "../assets/logout.png"
 import signupi from '../assets/signup.png';
 const Navbar = () => {
-    const {logedin,setlogedin,setIsAuth,setadname,adname,isAuth}=useContext(Admininfo);
+    const {setIsAuth,setadname,adname,isAuth}=useContext(Admininfo);
     const navigate= useNavigate()
     const change=()=>
     {
-        if(localStorage.getItem("isAuth"))
+        if(isAuth)
         {    
-            console.log(localStorage.getItem("isAuth"));
+            navigate("/login");
+            console.log("in false");
             console.log(isAuth)
-            setlogedin(false);
-            setIsAuth(false);
-            localStorage.setItem("adname","")
-            localStorage.setItem("isAuth",false);
-            toast.error("logedout")
-            navigate("/login")
-            return;
+            toast.error("loged out")
+            setIsAuth(false)
+            setadname("")
+            localStorage.removeItem("isAuth")
+            localStorage.removeItem("adname")
         }
-
-        else
-            {
-                navigate("/login");
-                console.log("in false");
-                console.log(isAuth)
-            }
     }
   return (
     <div className="flex flex-col h-screen bg-[#4a0e4a] w-[200px] sticky text-white justify-between">
@@ -58,7 +50,7 @@ const Navbar = () => {
                 {!isAuth &&<img src={login} alt="" className='w-[20px] h-[20px] '/>}
                 {isAuth && <img src={logout} alt="" className='w-[20px] h-[20px] '/>}
 
-                <button onClick={()=>{change()}}>{(isAuth)?"logout":"login"}</button>
+                <button onClick={()=>{change()}}>{isAuth?"logout":"login"}</button>
         </div>
         
         {!isAuth && <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2'>

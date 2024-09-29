@@ -30,9 +30,9 @@ def get_emp(request):
         
         try:
             emp_instance = employee.objects.filter(adname__adname=adname)
-            data = Empdetail(emp_instance,many=True).data
+            data1 = Empdetail(emp_instance,many=True).data
             # print(data)
-            return Response(data)
+            return Response({"detail":"true","info":data1})
         except employee.DoesNotExist:
             return Response({"detail": "Employee not found"}, status=404)
     elif request.method=="PUT":
