@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-474^oqye*&(9l_e=qrhmy^^h#9z1e^+vfj@_*&7z^9edrf1vqx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['employee-management-one-nu.vercel.app']
 
 
 # Application definition
@@ -53,10 +53,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-# ]
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://employee-management-one-nu.vercel.app"
+    
+]
+# CORS_ALLOW_ALL_ORIGINS=True
 ROOT_URLCONF = 'empback.urls'
 
 TEMPLATES = [
@@ -81,16 +83,19 @@ WSGI_APPLICATION = 'empback.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',            # Ensure this is the correct database name
-        'USER': '',              # Give UserName
-        'PASSWORD': '',        # Ensure this is the correct password
-        'HOST': '',         # Use 'localhost' if MySQL is running on the same machine
-        'PORT': '',              # Default MySQL port
+        'NAME': 'Employee',            # Ensure this is the correct database name
+        'USER': 'root',              # Remove leading space
+        'PASSWORD': 'kishor',        # Ensure this is the correct password
+        'HOST': 'localhost',         # Use 'localhost' if MySQL is running on the same machine
+        'PORT': '3306',              # Default MySQL port
     }
 }
+
+
 
 
 # Password validation
