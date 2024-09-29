@@ -22,13 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-474^oqye*&(9l_e=qrhmy^^h#9z1e^+vfj@_*&7z^9edrf1vqx'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['employee-management-one-nu.vercel.app']
+ALLOWED_HOSTS = [
+    'employee-management-one-nu.vercel.app',
+    '127.0.0.1',  
+    'localhost',   
+]
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -98,8 +100,6 @@ DATABASES = {
 
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
