@@ -26,19 +26,19 @@ const Navbar = () => {
         }
     }
   return (
-    <div className="flex flex-col h-screen bg-[#4a0e4a] w-[200px] sticky text-white justify-between">
+    <div className="flex flex-col h-screen bg-[#4a0e4a] w-[200px] sticky text-white justify-between sm:w-[50px]">
         <div>
             {/* <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105'>
                 <img src="" alt="" />
                 <Link to="/update">Update</Link>
                 </div> */}
-            <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105 hover:text-red-500 flex flex-row  items-center space-x-2'>
+            <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105 hover:text-red-500 flex flex-row  items-center space-x-2 sm:hiden'>
                 <img src={add} alt="" className='w-[20px] h-[20px]' onClick={()=>{navigate("/create")}}/>
-                <Link to="/create">Create</Link>
+                <Link to="/create" className='flex sm:hidden'>Create</Link>
             </div>
             <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2'>
                 <img src={employeedetail} alt="" className='w-[20px] h-[20px] bg-white rounded-[23px]' onClick={()=>{navigate("/")}}/>
-                <Link to="/">Employee Detail</Link>
+                <Link to="/" className='flex sm:hidden'>Employee Detail</Link>
             </div>
             {/* <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105'>
                 <img src="" alt="" />
@@ -50,12 +50,12 @@ const Navbar = () => {
                 {!isAuth &&<img src={login} alt="" className='w-[20px] h-[20px] '/>}
                 {isAuth && <img src={logout} alt="" className='w-[20px] h-[20px] '/>}
 
-                <button onClick={()=>{change()}}>{isAuth?"logout":"login"}</button>
+                <button onClick={()=>{change()} } className='flex sm:hidden'>{isAuth?"logout":"login"}</button>
         </div>
         
         {!isAuth && <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105  hover:text-red-500 flex flex-row  items-center space-x-2'>
                 <img src={signupi} alt="" onClick={()=>{navigate("/signup")}} className='w-[20px] h-[20px] bg-white rounded-[23px]'/>
-                <Link to="/signup">Sign up</Link>
+                <Link to="/signup" className='flex sm:hidden'>Sign up</Link>
         </div>}
         </div>
     </div>
