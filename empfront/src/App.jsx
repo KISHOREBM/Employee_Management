@@ -10,7 +10,7 @@ import { Admininfo } from "./Context/Context";
 function App() {
 
   return (
-    <div className="h-screen flex">
+    <div className="h-[100vh] flex">
       <Router>
         <Navbar />
         <div className="flex-grow p-4">
