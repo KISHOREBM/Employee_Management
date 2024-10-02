@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     screens:{
-      sm:{max:'500px'},
+      sm:{max:'400px'},
     },
     extend: {},
   },
