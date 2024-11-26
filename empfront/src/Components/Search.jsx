@@ -6,7 +6,7 @@ import updatei from "../assets/edit.png"
 import deletei from "../assets/delete.png"
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import userphot from '../assets/userphoto.png'
 
 const Search = () => {
   const [show,setshow]=useState(true)
@@ -108,7 +108,7 @@ const Search = () => {
         >
           <div>
             <img
-              src="https://icons.veryicon.com/png/o/miscellaneous/standard/user-274.png"
+              src={userphot}
               alt="no photo"
               className='w-[75px] h-[75px] rounded-[15px]'
             />
