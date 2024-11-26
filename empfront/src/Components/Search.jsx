@@ -19,8 +19,9 @@ const Search = () => {
   const [date,setdate]=useState("")
   const [see,setsee]=useState(true)
   const [update,setupdate]=useState()
-  const [valu,setvalue]=useState()
+  const [valu,setvalue]=useState([])
   const {adname,isAuth,setisAuth}=useContext(Admininfo)
+  const [showimage,setimage]= useState(false)
   const navigate=useNavigate()
     const getinfo=async()=>{
       console.log(isAuth)
@@ -32,6 +33,8 @@ const Search = () => {
       const response = await axios.get("http://127.0.0.1:8000/app/getemp/",{params: {
         adname: adname
       }})
+      console.log("hello")
+      console.log(response.data)
       console.log(adname)
       if(response.data.detail=="true")
       {
@@ -46,7 +49,11 @@ const Search = () => {
     const updateinfo=async(e)=>{
       // console.log("i am in")
       e.preventDefault();
+      
+      
       const response = await axios.put("http://127.0.0.1:8000/app/getemp/",{"value":update,"data":{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${adname}`}})
+      console.log("hello")
+      console.log(response.data)
       if(response.data['detail']==="true")
       {
         getinfo();
@@ -83,7 +90,7 @@ const Search = () => {
     }
  
   return (
-      <div >
+      <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
           {see && (
             <div className='w-full flex justify-center items-center mt-80 flex-col'>
               <p className='text-gray-500   '>Click button for detail</p>
@@ -91,39 +98,41 @@ const Search = () => {
             </div>
           )}
 
-{!see && show && (
-  <table className='border-none w-full'>
-    <thead className=' w-full'>
-      <tr >
-        <th>Name</th>
-        <th>Epid</th>
-        <th>Email</th>
-        <th>Age</th>
-        <th>Job</th>
-        <th>Department</th>
-        <th>Hiredate</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody className=' w-full text-center'>
+  {!see && show && <div className='flex flex-row flex-wrap justify-between m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (
-        <tr key={index} className=' '>
-          <td className='m-2'>{value.empname}</td>
-          <td className='m-2'>{value.empid}</td>
-          <td className='m-2'>{value.email}</td>
-          <td className='m-2'>{value.age}</td>
-          <td className='m-2'>{value.job}</td>
-          <td className='m-2'>{value.dept}</td>
-          <td className='m-2'>{value.date}</td>
-          <td className='flex flex-row justify-center items-center'>
-            <img src={updatei} className='w-[40px] cursor-pointer h-[40px] bg-purple-500 m-3 p-2 ' onClick={() => changeshow(index)}/>
-            <img src={deletei} className='w-[40px] cursor-pointer h-[40px] bg-purple-500 m-3 p-2' onClick={() => changeDelete(index)}/>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-)}
+        <div
+          className={`flex flex-col flex-wrap justify-center m-[4px] overflow-hidden hover:scale-105 transition-all duration-1000 }`}
+          key={index}
+          onMouseOver={() => setimage(index)} 
+          onMouseOut={() => setimage(null)} 
+        >
+          <div>
+            <img
+              src="https://icons.veryicon.com/png/o/miscellaneous/standard/user-274.png"
+              alt="no photo"
+              className='w-[75px] h-[75px] rounded-[15px]'
+            />
+          </div>
+          <div>Name: {value.empname}</div>
+          <div>Empid: {value.empid}</div>
+          <div>Email: {value.email}</div>
+          <div>Age: {value.age}</div>
+          <div>Job: {value.job}</div>
+          <div>Department: {value.dept}</div>
+          <div>Date: {value.date}</div>
+          
+          <div className={`${showimage === index ? 'flex ' : 'hidden'} flex-row items-start gap-[10px]`}>
+            <div className='flex gap-[10px]  text-[purple] cursor-pointer '>
+              <h4 onClick={() => changeshow(index)}>Update</h4>
+            </div>
+            <div className='flex gap-[10px] text-[purple] cursor-pointer'>
+              <h4 onClick={() => changeDelete(index)}>Delete</h4>
+            </div>
+          </div>
+        </div>))}
+    </div>}
+
+
 
         {!show && 
         (<form className='flex flex-col space-y-4' onSubmit={(e)=>{updateinfo(e)}}>
@@ -147,7 +156,6 @@ const Search = () => {
           <div className='flex flex-col  w-[300px] space-y-2'>
             <label htmlFor="Job">Job title:</label>
           <select id="dropdown" className='outline-none' required value={job} onChange={(e)=>{setjob(e.target.value)}}>
-          {/* <option value="">Select an option</option> */}
           <option value="Full Stack Developer">Full Stack Developer</option>
           <option value="Data Analysis">Data Analysis</option>
           <option value="Game Developer">Game Developer</option>

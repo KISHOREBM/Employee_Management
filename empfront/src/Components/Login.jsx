@@ -11,6 +11,7 @@ const Login = () => {
     const navigate=useNavigate()
     // const [withname,setwithname]=useState(true)
     const {setadname,adname,setIsAuth}=useContext(Admininfo)
+    
     const seelogin=async (e)=>{
       e.preventDefault()
         const response =await axios.post("http://127.0.0.1:8000/app/login/",{"username":`${username}`,"password":`${password1}`})
@@ -32,7 +33,7 @@ const Login = () => {
     }
     
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div className='flex justify-center items-center  flex-col relative w-full h-screen '>
     <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center'>
       <form onSubmit={(e)=>(seelogin(e))}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
@@ -56,6 +57,7 @@ const Login = () => {
 
       </form>
     </div>
+   
   </div>
   )
 }

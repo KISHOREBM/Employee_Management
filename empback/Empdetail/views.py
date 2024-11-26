@@ -7,10 +7,12 @@ from .searilizer import Empdetail,admin
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+import numpy as np
 @api_view(["POST"])
 def create_emp(request):
     data=request.data
-    print(data)
+    # print(data)
     searilizer=Empdetail(data=data)
     if searilizer.is_valid():
         # print("hello1")
@@ -31,7 +33,9 @@ def get_emp(request):
         try:
             emp_instance = employee.objects.filter(adname__adname=adname)
             data = Empdetail(emp_instance,many=True).data
-            print(data)
+            # print(data)
+            if not data:
+                return Response({"detail":"false","info":"Employee not found"})
             return Response({"detail":"true","info":data})
         except employee.DoesNotExist:
             return Response({"detail": "Employee not found"}, status=404)
@@ -50,7 +54,7 @@ def get_emp(request):
             
     else:
         data=request.data
-        print(data)
+        # print(data)
         emp_instanse=employee.objects.get(empid=data['empid'])
         if emp_instanse :
             searilizer=Empdetail(emp_instanse)
@@ -65,12 +69,12 @@ def sign_up(request):
     searilizer=admin(data=data)
     if searilizer.is_valid():
         user=searilizer.save()
-        print(data)
+        # print(data)
         extuser=extenduser(user=user,adname=data['username'])
         extuser.save()
         return Response({"detail":"true","info":searilizer.data})
     else:
-        print("in else")
+        # print("in else")
         return Response({"detail":"false","info":searilizer.errors})
 @api_view(['POST',"GET"])
 def user_login(request):
@@ -85,3 +89,16 @@ def user_login(request):
         return Response({"value":"false","info":"Invalid username or password"})
         
     
+@api_view(['POST','GET'])
+def getoptverification(request):
+    data=request.data
+    
+    message=''.join(map(str,np.random.randint(0,9,4)))
+    
+    heading='otp to login'
+    
+    receiver_mail=data.get('email')
+    sender='rnsitcse1@gmail.com'
+    # print("hello")
+    send_mail(heading,f"your otp to login {message}",sender,[receiver_mail])
+    return Response({'value':message,'detail':True})

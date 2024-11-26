@@ -5,22 +5,20 @@ import Search from "./Components/Search";
 import Create from "./Components/Create";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
-import { Admininfo } from "./Context/Context";
+
 
 function App() {
 
   return (
-    <div className="h-[100vh] flex">
+    <div className="flex h-screen w-full relative ">
       <Router>
         <Navbar />
-        <div className="flex-grow p-4">
           <Routes>
             <Route path="/" element={<Search />} />
             <Route path="/create" element={<Create />} />
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
           </Routes>
-        </div>
       </Router>
     </div>
   );
