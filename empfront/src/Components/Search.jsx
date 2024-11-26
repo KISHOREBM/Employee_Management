@@ -1,9 +1,7 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Admininfo } from '../Context/Context';
-import updatei from "../assets/edit.png"
-import deletei from "../assets/delete.png"
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import userphot from '../assets/userphoto.png'
