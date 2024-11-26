@@ -10,7 +10,7 @@ import Signup from "./Components/Signup";
 function App() {
 
   return (
-    <div className="flex h-screen w-full relative ">
+    <div className="flex h-screen w-full ">
       <Router>
         <Navbar />
           <Routes>
