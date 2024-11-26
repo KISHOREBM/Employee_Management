@@ -78,8 +78,8 @@ const Signup = () => {
         }
     }
     return (
-    <div className='flex justify-center items-center h-screen relative ' >
-    <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center'>
+    <div className='flex justify-center items-center h-screen relative w-full ' >
+    <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center '>
       <form onSubmit={VerifyOtp}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
           <label htmlFor="">Name:</label>
