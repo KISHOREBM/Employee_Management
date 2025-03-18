@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Admininfo } from '../Context/Context';
 import {  toast } from 'react-toastify';
@@ -86,17 +86,14 @@ const Search = () => {
       else
       getinfo()
     }
- 
+    useEffect(()=>{
+      getinfo();
+    },[])
   return (
-      <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
-          {see && (
-            <div className='w-full flex justify-center items-center mt-80 flex-col'>
-              <p className='text-gray-500   '>Click button for detail</p>
-              <button onClick={()=>{getinfo()}} className='bg-blue-400 text-white w-[70px] text-wrap border-3 rounded-[45px] transform transition delay-200 hover:scale-125'>Get Info</button>
-            </div>
-          )}
+      
+        <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
 
-  {!see && show && <div className='flex flex-row flex-wrap justify-between m-[10px] gap-[20px] transition-all duration-2000 '>
+  ({!see && show && <div className='flex flex-row flex-wrap justify-between m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (
         <div
           className={`flex flex-col flex-wrap justify-center m-[4px] overflow-hidden hover:scale-105 transition-all duration-1000 }`}
@@ -133,7 +130,7 @@ const Search = () => {
 
 
         {!show && 
-        (<form className='flex flex-col space-y-4' onSubmit={(e)=>{updateinfo(e)}}>
+        (<form className='flex flex-col space-y-4 m-[10px]' onSubmit={(e)=>{updateinfo(e)}}>
           <div className='flex flex-col  w-[300px] space-y-2'>
             <label htmlFor="Empid">Empid:</label>
             <input type="text" placeholder='enter employee id' className='outline-none transform uppercase' required value={empid} onChange={(e)=>{setempid(e.target.value)}}/>
@@ -170,8 +167,11 @@ const Search = () => {
           </div>
           <input type="submit" className='flex border-2 border-black bg-[#095e9b] text-white w-16 cursor-pointer rounded-[18px]' />
         </form>
-    )}
+    )}) :(
+      <div><h1>Loading...</h1></div>
+    )
       </div>
+     
   )
 }
 

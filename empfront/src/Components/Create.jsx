@@ -44,7 +44,7 @@ const Create = () => {
       }
     }
   return (
-    <div className='flex flex-col  m-4 w-full h-full capitalize'>
+    <div className='flex flex-col  m-[4px] w-full h-full capitalize'>
       <h1 className='mb-4 font-bold w-full font-serif justify-center text-center'>Add Employee</h1>
       <form className='flex flex-col space-y-4' onSubmit={backpost}>
         <div className='flex flex-col  w-[300px] space-y-2'>

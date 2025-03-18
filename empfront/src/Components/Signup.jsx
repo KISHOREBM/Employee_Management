@@ -1,7 +1,6 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Admininfo } from '../Context/Context'
 import { toast } from 'react-toastify'
 const Signup = () => {
     const [username,setusername]=useState("")
@@ -9,7 +8,6 @@ const Signup = () => {
     const [password1,setpassword1]=useState("")
     const [password2,setpassword2]=useState("")
     const navigate=useNavigate()
-    const {adname}=useContext(Admininfo)
     const [first,setfirst]=useState()
     const [third,setthird]=useState()
     const [secand,setsecand]=useState()
