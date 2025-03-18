@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { Admininfo } from '../Context/Context'
@@ -16,12 +16,12 @@ const Create = () => {
   const {adname,isAuth}=useContext(Admininfo)
   const backpost=async (e)=>
   {
-    e.preventDefault();
     if(!isAuth){
       toast.error("please login");
       navigate("/login")
       return;
     }
+    e.preventDefault();
     const response =await axios.post("http://127.0.0.1:8000/app/createmp/",{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${adname}`})
     console.log(adname)
     console.log(response.data)
@@ -43,6 +43,9 @@ const Create = () => {
           toast.error(`${error.info['empid']}`);  // Show the error message from the backend
       }
     }
+    useEffect(()=>{
+      backpost()
+    },[])
   return (
     <div className='flex flex-col  m-[4px] w-full h-full capitalize'>
       <h1 className='mb-4 font-bold w-full font-serif justify-center text-center'>Add Employee</h1>
