@@ -1,7 +1,6 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Admininfo } from '../Context/Context'
 import { toast } from 'react-toastify'
 const Signup = () => {
     const [username,setusername]=useState("")
@@ -9,7 +8,6 @@ const Signup = () => {
     const [password1,setpassword1]=useState("")
     const [password2,setpassword2]=useState("")
     const navigate=useNavigate()
-    const {adname}=useContext(Admininfo)
     const [first,setfirst]=useState()
     const [third,setthird]=useState()
     const [secand,setsecand]=useState()
@@ -22,15 +20,16 @@ const Signup = () => {
       // console.log(first*1000,secand*100,third*10,forth)
       // console.log(value)
       // console.log(otp)
+      setfirst('')
+      setsecand('')
+      setthird('')
+      setforth('')
       if(value==otp)
       {
         toast("verified sucesssfully")
         setenteropt(false)
         submi()
-        setfirst('')
-      setsecand('')
-      setthird('')
-      setforth('')
+        
         return
       }
       
@@ -78,9 +77,10 @@ const Signup = () => {
         }
     }
     return (
-    <div className='flex justify-center items-center h-screen relative ' >
-    <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center'>
-      <form onSubmit={VerifyOtp}>
+    <div className='flex justify-center items-center h-screen relative w-full ' >
+      {!enterotp &&
+    <div className='flex border-2 border-black w-[400px] rounded-[20px] items-center '>
+        <form onSubmit={VerifyOtp}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
           <label htmlFor="">Name:</label>
           <input type="text" placeholder='Enter Name' className='outline-none w-[300px]' required value={username} onChange={(e)=>{setusername(e.target.value)}} />
@@ -104,20 +104,21 @@ const Signup = () => {
 
       </form>
     </div>
+      }
     {enterotp && <form  className='flex h-screen  w-full justify-center items-center absolute bg-[rgba(0,0,0,0.5)]' onSubmit={checkotp}>
-        <div className='flex justify-center item-center flex-col  border-[3px] rounded-[19px] w-[200px] h-[150px] '>
+        <div className='flex justify-center item-center flex-col  border-[3px] rounded-[19px] w-[400px] h-[350px] '>
             <div className='flex m-[4px] p-[2px] w-full justify-center'>
-                <h4>Enter the otp</h4>
+                <h1 className='font-serif text-[40px] '>Enter the otp</h1>
             </div>
-            <div className='flex justify-between items-center m-[4px] p-[2px] '>
-                <input type="numeric" name="" id="" maxLength="1" value={first} onChange={(e)=>{setfirst(e.target.value)}} className='w-[20px] border-2 rounded-[20px] text-center'/>
-                <input type="numeric" name="" id="" maxLength="1" value={secand} onChange={(e)=>{setsecand(e.target.value)}} className='w-[20px] border-2 rounded-[20px] text-center'/>
-                <input type="numeric" name="" id="" maxLength="1" value={third} onChange={(e)=>{setthird(e.target.value)}} className='w-[20px] border-2 rounded-[20px] text-center'/>
-                <input type="numeric" name="" id="" maxLength="1" value={forth} onChange={(e)=>{setforth(e.target.value)}} className='w-[20px] border-2 rounded-[20px] text-center'/>
+            <div className='flex  justify-center p-[2px] '>
+                <input type="numeric" name="" id="" maxLength="1" value={first} onChange={(e)=>{setfirst(e.target.value)}} className=' m-[20px] w-[20px] border-2 rounded-[20px] text-center'/>
+                <input type="numeric" name="" id="" maxLength="1" value={secand} onChange={(e)=>{setsecand(e.target.value)}} className=' m-[20px] w-[20px] border-2 rounded-[20px] text-center'/>
+                <input type="numeric" name="" id="" maxLength="1" value={third} onChange={(e)=>{setthird(e.target.value)}} className=' m-[20px] w-[20px] border-2 rounded-[20px] text-center'/>
+                <input type="numeric" name="" id="" maxLength="1" value={forth} onChange={(e)=>{setforth(e.target.value)}} className=' m-[20px] w-[20px] border-2 rounded-[20px] text-center'/>
             </div>
-            <div className='flex w-full justify-center items-center'>
-                <input type="submit" value="Verify" className='cursor-pointer m-[2px] p-[5px]  justify-center items-center bg-green-500 text-white text-center rounded-[23px] ' />
-                <button className='' onClick={()=>{setenteropt(!enterotp)}}>back</button>
+            <div className='flex w-full justify-center items-center '>
+                <input type="submit" value="Verify" className=' cursor-pointer m-[5px] p-[10px] w-[100px]  justify-center items-center bg-green-500 text-white text-center rounded-[23px] ' />
+                <button className='cursor-pointer m-[5px] p-[10px] w-[80px] justify-center items-center bg-green-500 text-white text-center rounded-[23px] ' onClick={()=>{setenteropt(!enterotp)}}>back</button>
             </div>
         </div>
     </form>}

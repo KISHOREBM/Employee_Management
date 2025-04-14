@@ -37,7 +37,6 @@ const Navbar = () => {
         }
     },[window.screen])
   return (
-    <section className='flxed h-screen'>
     <div className={`flex flex-col  bg-[#4a0e4a] w-[200px]  text-white justify-between sm:w-[60px] h-screen `}>
         <div>
             {/* <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105'>
@@ -71,7 +70,6 @@ const Navbar = () => {
         </div>}
         </div>
     </div>
-    </section>
   )
 }
 
