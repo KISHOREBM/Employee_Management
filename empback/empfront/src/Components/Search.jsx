@@ -89,12 +89,12 @@ const Search = () => {
     },[])
   return (
       
-        <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
+        <div className='h-screen w-full overflow-scroll overflow-x-hidden overflow-y-hidden'>
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         {!see && show && <div className='flex flex-row flex-wrap  m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (
         <div
-          className={`flex flex-col flex-wrap justify-center m-[4px] overflow-hidden hover:scale-105 transition-all duration-1000 }`}
+          className={`flex flex-col flex-wrap justify-center m-[4px] overflow-hidde  hover:scale-105 transition-all duration-1000 }`}
           key={index}
           onMouseOver={() => setimage(index)} 
           onMouseOut={() => setimage(null)} 
@@ -164,7 +164,9 @@ const Search = () => {
         </form>
     )}       
         {/* </Suspense> */}
-  
+        <div className='flex justify-center items-center mt-[30px] w-full h-screen'>
+          <button className='bg-[blue] text-[white]  p-[10px] sm:w-auto rounded-[23px]'>Add Employee</button>
+        </div>
       </div>
      
   )

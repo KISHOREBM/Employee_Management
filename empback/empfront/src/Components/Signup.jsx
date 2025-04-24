@@ -77,7 +77,7 @@ const Signup = () => {
         }
     }
     return (
-    <div className='flex justify-center items-center h-screen relative w-full sm:w-auto sm:ml-[10px] overflow-scroll' >
+    <div className='flex justify-center items-center h-screen relative w-full sm:w-auto sm:ml-[10px] overflow-scroll overflow-x-hidden overflow-y-hidden' >
       {!enterotp &&
     <div className='flex border-2 border-black w-[400px] sm:w-auto rounded-[20px] items-center '>
         <form onSubmit={VerifyOtp}>
