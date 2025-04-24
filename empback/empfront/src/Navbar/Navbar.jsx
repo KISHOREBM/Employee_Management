@@ -37,7 +37,7 @@ const Navbar = () => {
         }
     },[window.screen])
   return (
-    <div className={`flex flex-col  bg-[#4a0e4a] w-[200px]  text-white justify-between sm:w-[60px] h-screen overflow-scroll flex-shrink-0`}>
+    <div className={`flex flex-col  bg-[#4a0e4a] w-[200px]  text-white justify-between sm:w-[60px] h-screen overflow-scroll flex-shrink-0 overflow-x-hidden overflow-y-hidden`}>
         <div>
             {/* <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105'>
                 <img src="" alt="" />

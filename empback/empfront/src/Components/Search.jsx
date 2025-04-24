@@ -90,8 +90,8 @@ const Search = () => {
   return (
       
         <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
-        <Suspense fallback={<div>Loading...</div>}>
-        {!see && show && <div className='flex flex-row flex-wrap justify-between m-[10px] gap-[20px] transition-all duration-2000 '>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
+        {!see && show && <div className='flex flex-row flex-wrap  m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (
         <div
           className={`flex flex-col flex-wrap justify-center m-[4px] overflow-hidden hover:scale-105 transition-all duration-1000 }`}
@@ -163,7 +163,7 @@ const Search = () => {
           <input type="submit" className='flex border-2 border-black bg-[#095e9b] text-white w-16 cursor-pointer rounded-[18px]' />
         </form>
     )}       
-        </Suspense>
+        {/* </Suspense> */}
   
       </div>
      
