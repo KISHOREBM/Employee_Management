@@ -89,7 +89,7 @@ const Search = () => {
     },[])
   return (
       
-        <div className='h-screen w-full overflow-scroll overflow-x-hidden overflow-y-hidden'>
+        <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         {!see && show && <div className='flex flex-row flex-wrap  m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (

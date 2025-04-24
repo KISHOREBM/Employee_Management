@@ -33,7 +33,7 @@ const Login = () => {
     }
     
   return (
-    <div className='flex justify-center items-center  flex-col relative w-full sm:w-auto  sm:ml-[10px] h-screen overflow-scroll overflow-x-hidden overflow-y-hidden'>
+    <div className='flex justify-center items-center  flex-col relative w-full sm:w-auto  sm:ml-[10px] h-screen '>
     <div className='flex border-2 border-black w-[400px] sm:w-auto sm:ml-[10px] rounded-[20px] items-center'>
       <form onSubmit={(e)=>(seelogin(e))}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
