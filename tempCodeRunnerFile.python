@@ -1,0 +1,17 @@
+n=4
+count=1
+for i in range(n):
+    for j in range(n-i-1):
+        print(" ",end="   ")
+    if i%2==0:
+        for j in range(n):
+            print(count,end="   ")
+            count+=1
+    else:
+        pre=count
+        for j in range(n):
+            pre=count+n-j-1
+            print(pre,end="   ")
+        count+=n
+    print()
+        

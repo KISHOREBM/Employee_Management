@@ -140,5 +140,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rnsitcse1@gmail.com'
-EMAIL_HOST_PASSWORD = 'akqgqblnuvwovtxy' 
+EMAIL_HOST_PASSWORD = 'qpgscxcfgcjoraoo' 
 # DEFAULT_FROM_EMAIL = 'noreplay@gmail.com'
