@@ -165,7 +165,7 @@ const Search = () => {
     )}       
         {/* </Suspense> */}
         <div className='flex justify-center items-center mt-[30px] w-full h-screen'>
-          <button className='bg-[blue] text-[white]  p-[10px] sm:w-auto rounded-[23px]'>Add Employee</button>
+          <button className='bg-[blue] text-[white]  p-[10px] sm:w-auto rounded-[23px]' onClick={()=>{navigate('/create')}}>Add Employee</button>
         </div>
       </div>
      
