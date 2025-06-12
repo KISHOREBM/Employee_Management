@@ -1,91 +1,171 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Admininfo } from '../Context/Context'
-import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const Create = () => {
-  const [name,setname]=useState("")
-  const [empid,setempid]=useState("")
-  const [email,setemail]=useState("")
-  const [age,setage]=useState("")
-  const [job,setjob]=useState("")
-  const [dept,setdept]=useState("")
-  const [date,setdate]=useState("")
-  const navigate=useNavigate()
-  const {adname,isAuth}=useContext(Admininfo)
-  const backpost=async (e)=>
-  {
-    if(!isAuth){
-      toast.error("please login");
-      navigate("/login")
-      return;
+  const location = useLocation()
+  const {
+    name1 = '',
+    empid1 = '',
+    email1 = '',
+    ag = '',
+    jo = '',
+    dep = '',
+    dat = '',
+    isUpdate = false
+  } = location.state || {}
+
+  const [name, setname] = useState(name1)
+  const [empid, setempid] = useState(empid1)
+  const [email, setemail] = useState(email1)
+  const [age, setage] = useState(ag)
+  const [job, setjob] = useState(jo)
+  const [dept, setdept] = useState(dep)
+  const [date, setdate] = useState(dat)
+
+  const navigate = useNavigate()
+  const { adname, isAuth } = useContext(Admininfo)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!isAuth) {
+      toast.error('Please login')
+      navigate('/login')
+      return
     }
-    e.preventDefault();
-    const response =await axios.post("http://127.0.0.1:8000/app/createmp/",{"empid":empid,"empname":`${name}`,"email":`${email}`,"age":`${age}`,"job":`${job}`,"dept":`${dept}`,"date":`${date}`,"adname":`${adname}`})
-    console.log(adname)
-    console.log(response.data)
-    if(response.data.detail === "true") 
-    {navigate("/") ;
-      toast.success("employee created");
+
+    const payload = {
+      empid,
+      empname: name,
+      email,
+      age,
+      job,
+      dept,
+      date,
+      adname,
     }
-    // Redirect or take some action on success
-    const error=response.data
-      console.log(error)
-      if(error.info['email'])
-      {
-        console.log(response.data);
-        toast.error(`${error.info['email']}`);  
+
+    try {
+      let response
+      if (isUpdate) {
+        response = await axios.put('http://127.0.0.1:8000/app/getemp/', {
+          value: empid1,
+          data: payload
+        })
+      } else {
+        response = await axios.post('http://127.0.0.1:8000/app/createmp/', payload)
       }
-      else if(error.info['empid'])
-      {
-        console.log(response.data);
-          toast.error(`${error.info['empid']}`);  // Show the error message from the backend
+
+      if (response.data.detail === 'true') {
+        toast.success(isUpdate ? 'Employee updated' : 'Employee created')
+        navigate('/')
+      } else if (response.data.info) {
+        const error = response.data.info
+        if (error.email) toast.error(error.email)
+        else if (error.empid) toast.error(error.empid)
+        else toast.error(response.data.info)
       }
+    } catch (error) {
+      toast.error('Something went wrong!')
     }
-    useEffect(()=>{
-      backpost()
-    },[])
+  }
+
   return (
-    <div className='flex flex-col  m-[4px] w-full h-full capitalize sm:overflow-scroll sm:overflow-x-hidden '>
-      <h1 className='mb-4 font-bold w-full font-serif justify-center text-center'>Add Employee</h1>
-      <form className='flex flex-col space-y-4' onSubmit={backpost}>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Empid">Empid:</label>
-          <input type="text" placeholder='enter employee id' className='outline-none transform uppercase' required value={empid} onChange={(e)=>{setempid(e.target.value)}}/>
+    <div className='flex flex-col items-center justify-center w-full h-full p-4'>
+      <h1 className='mb-4 text-3xl font-bold'>
+        {isUpdate ? 'Update Employee' : 'Add Employee'}
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className='w-full max-w-xl p-6 border-2 rounded-lg space-y-4'
+      >
+        <div>
+          <label>Emp ID:</label>
+          <input
+            type='text'
+            className='w-full p-2 border rounded'
+            value={empid}
+            required
+            disabled={isUpdate}
+            onChange={(e) => setempid(e.target.value)}
+          />
         </div>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Name">Name:</label>
-          <input type="text" placeholder='enter name' className='outline-none' required value={name} onChange={(e)=>{setname(e.target.value)}}/>
+        <div>
+          <label>Name:</label>
+          <input
+            type='text'
+            className='w-full p-2 border rounded'
+            value={name}
+            required
+            onChange={(e) => setname(e.target.value)}
+          />
         </div>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="email">email:</label>
-          <input type="email" placeholder='enter email' className='outline-none ' required value={email} onChange={(e)=>{setemail(e.target.value)}}/>
+        <div>
+          <label>Email:</label>
+          <input
+            type='email'
+            className='w-full p-2 border rounded'
+            value={email}
+            required
+            onChange={(e) => setemail(e.target.value)}
+          />
         </div>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Age">age:</label>
-          <input type="number" placeholder='enter age' className='outline-none' required value={age} onChange={(e)=>{setage(e.target.value)}}/>
+        <div>
+          <label>Age:</label>
+          <input
+            type='number'
+            className='w-full p-2 border rounded'
+            value={age}
+            required
+            onChange={(e) => setage(e.target.value)}
+          />
         </div>
-        
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Job">Job title:</label>
-        <select id="dropdown" className='outline-none' required value={job} onChange={(e)=>{setjob(e.target.value)}}>
-        <option value="">Select an option</option>
-        <option value="Full Stack Developer">Full Stack Developer</option>
-        <option value="Data Analysis">Data Analysis</option>
-        <option value="Game Developer">Game Developer</option>
-        <option value="Machine Learning">Machine Learning</option>
-      </select>
+        <div>
+          <label>Job Title:</label>
+          <select
+            className='w-full p-2 border rounded'
+            value={job}
+            required
+            onChange={(e) => setjob(e.target.value)}
+          >
+            <option value=''>Select Job</option>
+            <option value='Full Stack Developer'>Full Stack Developer</option>
+            <option value='Data Analysis'>Data Analysis</option>
+            <option value='Game Developer'>Game Developer</option>
+            <option value='Machine Learning'>Machine Learning</option>
+          </select>
         </div>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Department">Department:</label>
-          <input type="text" placeholder='enter Department' className='outline-none' required value={dept} onChange={(e)=>{setdept(e.target.value)}}/>
+        <div>
+          <label>Department:</label>
+          <input
+            type='text'
+            className='w-full p-2 border rounded'
+            value={dept}
+            required
+            onChange={(e) => setdept(e.target.value)}
+          />
         </div>
-        <div className='flex flex-col  w-[300px] space-y-2'>
-          <label htmlFor="Date">Date-of-hire:</label>
-          <input type="date" placeholder='enter date' className='outline-none cursor-pointer' required value={date} onChange={(e)=>{setdate(e.target.value)}}/>
+        <div>
+          <label>Date of Hire:</label>
+          <input
+            type='date'
+            className='w-full p-2 border rounded'
+            value={date}
+            required
+            onChange={(e) => setdate(e.target.value)}
+          />
         </div>
-        <input type="submit" className='flex border-2 border-black bg-[#095e9b] text-white w-16 cursor-pointer rounded-[18px]' />
+        <div className='flex justify-center'>
+          <button
+            type='submit'
+            className='px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700'
+          >
+            {isUpdate ? 'Update' : 'Create'}
+          </button>
+        </div>
       </form>
     </div>
   )

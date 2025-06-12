@@ -5,6 +5,7 @@ import { Admininfo } from '../Context/Context';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import userphot from '../assets/userphoto.png'
+import Create from './Create';
 
 const Search = () => {
   const [show,setshow]=useState(true)
@@ -61,17 +62,21 @@ const Search = () => {
       toast.error(`${response.data['info']}`)
       
     }
-    function changeshow(index){
-      setshow(false);
-      setname(valu[index].empname)
-      setemail(valu[index].email)
-      setage(valu[index].age)
-      setdate(valu[index].date)
-      setdept(valu[index].dept)
-      setjob(valu[index].job)
-      setempid(valu[index].empid)
-      setupdate(valu[index].empid)
-    }
+    const changeshow = (index) => {
+  const selected = valu[index];
+  navigate('/create', {
+    state: {
+      name1: selected.empname,
+      empid1: selected.empid,
+      email1: selected.email,
+      ag: selected.age,
+      jo: selected.job,
+      dep: selected.dept,
+      dat: selected.date,
+      isUpdate: true,
+    },
+  });
+};
     const changeDelete=async(index)=>{
       toast.success(`${valu[index]['empid']} deleted`)
       const response = await axios.delete("http://127.0.0.1:8000/app/getemp/",{data:{"empid":`${valu[index]['empid']}`}})
@@ -89,8 +94,7 @@ const Search = () => {
     },[])
   return (
       
-        <div className='h-screen w-full overflow-scroll overflow-x-hidden'>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
+        <div className='h-screen w-full overflow-scroll overflow-x-hidden t-[27px]'>
         {!see && show && <div className='flex flex-row flex-wrap  m-[10px] gap-[20px] transition-all duration-2000 '>
       {valu.map((value, index) => (
         <div
@@ -124,45 +128,7 @@ const Search = () => {
           </div>
         </div>))}
     </div>}
-        {!show && 
-        (<form className='flex flex-col space-y-4 m-[10px]' onSubmit={(e)=>{updateinfo(e)}}>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Empid">Empid:</label>
-            <input type="text" placeholder='enter employee id' className='outline-none transform uppercase' required value={empid} onChange={(e)=>{setempid(e.target.value)}}/>
-          </div>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Name">Name:</label>
-            <input type="text" placeholder='enter name' className='outline-none' required value={name} onChange={(e)=>{setname(e.target.value)}}/>
-          </div>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="email">email:</label>
-            <input type="email" placeholder='enter email' className='outline-none ' required value={email} onChange={(e)=>{setemail(e.target.value)}}/>
-          </div>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Age">age:</label>
-            <input type="number" placeholder='enter age' className='outline-none' required value={age} onChange={(e)=>{setage(e.target.value)}}/>
-          </div>
-          
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Job">Job title:</label>
-          <select id="dropdown" className='outline-none' required value={job} onChange={(e)=>{setjob(e.target.value)}}>
-          <option value="Full Stack Developer">Full Stack Developer</option>
-          <option value="Data Analysis">Data Analysis</option>
-          <option value="Game Developer">Game Developer</option>
-          <option value="Machine Learning">Machine Learning</option>
-        </select>
-          </div>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Department">Department:</label>
-            <input type="text" placeholder='enter Department' className='outline-none' required value={dept} onChange={(e)=>{setdept(e.target.value)}}/>
-          </div>
-          <div className='flex flex-col  w-[300px] space-y-2'>
-            <label htmlFor="Date">Date-of-hire:</label>
-            <input type="date" placeholder='enter date' className='outline-none cursor-pointer' required value={date} onChange={(e)=>{setdate(e.target.value)}}/>
-          </div>
-          <input type="submit" className='flex border-2 border-black bg-[#095e9b] text-white w-16 cursor-pointer rounded-[18px]' />
-        </form>
-    )}       
+             
         {/* </Suspense> */}
         <div className='flex justify-center items-center mt-[30px] w-full h-screen'>
           <button className='bg-[blue] text-[white]  p-[10px] sm:w-auto rounded-[23px]' onClick={()=>{navigate('/create')}}>Add Employee</button>

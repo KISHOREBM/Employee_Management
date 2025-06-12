@@ -33,8 +33,8 @@ const Login = () => {
     }
     
   return (
-    <div className='flex justify-center items-center  flex-col relative w-full sm:w-auto  sm:ml-[10px] h-screen '>
-    <div className='flex border-2 border-black w-[400px] sm:w-auto sm:ml-[10px] rounded-[20px] items-center'>
+    <div className='flex justify-center items-center text-[23px]  flex-col relative w-full sm:w-auto  sm:ml-[10px] h-screen '>
+    <div className='flex border-2 border-black w-[400px] sm:w-auto sm:ml-[10px] rounded-[20px] items-center text-[23px]'>
       <form onSubmit={(e)=>(seelogin(e))}>
         <div className='flex flex-col m-2 p-2 space-y-2 w-full'>
           <label htmlFor="">Name:</label>
@@ -52,7 +52,7 @@ const Login = () => {
         
         <div className='flex flex-row m-2 p-2 justify-evenly w-full'>
         <Link to="/signup">Sign Up</Link>
-          <input type="submit"  className='outline-none w-[70px]  bg-[aqua] border-2 border-black rounded-[20px] text-white cursor-pointer' />
+          <input type="submit"  className='outline-none w-auto pl-[20px] pr-[20px]  bg-[aqua] border-2 border-black rounded-[20px] text-white cursor-pointer' />
         </div>
 
       </form>

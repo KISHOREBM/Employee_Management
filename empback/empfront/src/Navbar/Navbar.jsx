@@ -37,12 +37,11 @@ const Navbar = () => {
         }
     },[window.screen])
   return (
-    <div className={`flex flex-col  bg-[#4a0e4a] w-[200px]  text-white justify-between sm:w-[60px] h-screen overflow-scroll flex-shrink-0 overflow-x-hidden overflow-y-hidden`}>
+    <div className={`flex flex-col  bg-[#301a30] w-[200px] text-[25px]  text-white justify-between sm:w-[60px] h-screen overflow-scroll flex-shrink-0 overflow-x-hidden overflow-y-hidden`}>
         <div>
-            {/* <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105'>
-                <img src="" alt="" />
-                <Link to="/update">Update</Link>
-                </div> */}
+            <div className='mt-[10px] ml-[10px]'>
+                <h1 className='text-[29px]'>Employee Management</h1>
+            </div>
             <div className='m-2 p-2 cursor-pointer transition duration-200 hover:scale-105 hover:text-red-500 flex flex-row  items-center space-x-2 sm:hiden'>
                 {showword && <img src={add} alt="" className='w-[20px] h-[20px]' onClick={()=>{navigate("/create")}}/>}
                 <Link to="/create" className='flex sm:hidden'>Create</Link>
